@@ -16,12 +16,7 @@ if (!defined('ABSPATH')) {
 }
 
 define('HELLO_ELEMENTOR_CHILD_VERSION', '2.0.0');
-add_action('after_setup_theme', 'setup_woocommerce_support');
 
-function setup_woocommerce_support()
-{
-	add_theme_support('woocommerce');
-}
 /**
  * Load child theme scripts & styles.
  *
