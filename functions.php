@@ -64,13 +64,13 @@ add_action('widgets_init', 'wpdocs_theme_slug_widgets_init');
 
 
 remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart');
-remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
 
 function action_woocommerce_after_shop_loop_item()
 {
 ?>
 	<a href="<?= get_the_permalink() ?>" class="button"> View Product </a>
-<?php
+	<?php
 }
 
 add_action('woocommerce_after_shop_loop_item', 'action_woocommerce_after_shop_loop_item');
@@ -83,19 +83,20 @@ add_action('woocommerce_after_shop_loop_item', 'action_woocommerce_after_shop_lo
  * @compatible    WooCommerce 5.1
  * @community     https://businessbloomer.com/club/
  */
- 
- add_filter( 'woocommerce_variable_sale_price_html', 'businessbloomer_remove_prices', 9999, 2 );
- 
- add_filter( 'woocommerce_variable_price_html', 'businessbloomer_remove_prices', 9999, 2 );
-  
- add_filter( 'woocommerce_get_price_html', 'businessbloomer_remove_prices', 9999, 2 );
-  
- function businessbloomer_remove_prices( $price, $product ) {
-	if ( ! is_admin() ) $price = '';
-	return $price;
- }
 
- /*-----------------------------------------------------------------------------------*/
+add_filter('woocommerce_variable_sale_price_html', 'businessbloomer_remove_prices', 9999, 2);
+
+add_filter('woocommerce_variable_price_html', 'businessbloomer_remove_prices', 9999, 2);
+
+add_filter('woocommerce_get_price_html', 'businessbloomer_remove_prices', 9999, 2);
+
+function businessbloomer_remove_prices($price, $product)
+{
+	if (!is_admin()) $price = '';
+	return $price;
+}
+
+/*-----------------------------------------------------------------------------------*/
 /* Register Carbofields
 /*-----------------------------------------------------------------------------------*/
 add_action('carbon_fields_register_fields', 'tissue_paper_register_custom_fields');
@@ -107,11 +108,12 @@ function tissue_paper_register_custom_fields()
 /**
  * Disable reviews.
  */
-function iconic_disable_reviews() {
-	remove_post_type_support( 'product', 'comments' );
+function iconic_disable_reviews()
+{
+	remove_post_type_support('product', 'comments');
 }
 
-add_action( 'init', 'iconic_disable_reviews' );
+add_action('init', 'iconic_disable_reviews');
 
 /**
  * @snippet       New Product Tab @ WooCommerce Single Product
@@ -120,19 +122,42 @@ add_action( 'init', 'iconic_disable_reviews' );
  * @compatible    WooCommerce 8
  * @community     https://businessbloomer.com/club/
  */
- 
- add_filter( 'woocommerce_product_tabs', 'bbloomer_add_product_tab', 9999 );
-   
- function bbloomer_add_product_tab( $tabs ) {
+
+add_filter('woocommerce_product_tabs', 'bbloomer_add_product_tab', 9999);
+
+function bbloomer_add_product_tab($tabs)
+{
 	$tabs['products_included'] = array(
-	   'title' => __( 'Products Included', 'woocommerce' ), // TAB TITLE
-	   'priority' => 50, // TAB SORTING (DESC 10, ADD INFO 20, REVIEWS 30)
-	   'callback' => 'action_products_included_tab', // TAB CONTENT CALLBACK
+		'title' => __('Products Included', 'woocommerce'), // TAB TITLE
+		'priority' => 50, // TAB SORTING (DESC 10, ADD INFO 20, REVIEWS 30)
+		'callback' => 'action_products_included_tab', // TAB CONTENT CALLBACK
 	);
 	return $tabs;
- }
-  
- function action_products_included_tab() {
+}
+
+function action_products_included_tab()
+{
 	global $product;
-	echo 'Whatever content for ' . $product->get_name();
- }
+	$products_included = carbon_get_the_post_meta('products_included');
+	if ($products_included) {
+		$id = $products_included['id'];
+	?>
+		<div class="products-included">
+			<ul class="products elementor-grid columns-4">
+				<li class="product type-product post-<?= $id ?>">
+					<a href="<?= get_the_permalink($id) ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+						<div class="wc-img-wrapper">
+							<img src="<?= get_the_post_thumbnail_url($id, 'large') ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail">
+						</div>
+						<h2 class="woocommerce-loop-product__title"><?= get_the_title($id) ?></h2>
+					</a>
+					<a href="<?= get_the_permalink($id) ?>" class="button">
+						View Product
+					</a>
+				</li>
+
+			</ul>
+		</div>
+<?php
+	}
+}
