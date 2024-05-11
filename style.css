@@ -116,4 +116,8 @@ ul.products.products.products .wc-img-wrapper {
   .wc-block-product-categories-list.wc-block-product-categories-list li .wc-block-product-categories-list-item__image {
     margin-left: 0; }
 
+.dialog-close-button.dialog-close-button.dialog-close-button {
+  border-radius: 50%;
+  padding: 10px; }
+
 /*# sourceMappingURL=style.css.map */
