@@ -140,24 +140,29 @@ function action_products_included_tab()
 	global $product;
 	$products_included = carbon_get_the_post_meta('products_included');
 	if ($products_included) {
-		$id = $products_included['id'];
+
 	?>
 		<div class="products-included">
 			<ul class="products elementor-grid columns-4">
-				<li class="product type-product post-<?= $id ?>">
-					<a href="<?= get_the_permalink($id) ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-						<div class="wc-img-wrapper">
-							<img src="<?= get_the_post_thumbnail_url($id, 'large') ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail">
-						</div>
-						<h2 class="woocommerce-loop-product__title"><?= get_the_title($id) ?></h2>
-					</a>
-					<a href="<?= get_the_permalink($id) ?>" class="button">
-						View Product
-					</a>
-				</li>
-
+				<?php foreach ($products_included as $product) { ?>
+					<?php
+					$id = $product['id'];
+					?>
+					<li class="product type-product post-<?= $id ?>">
+						<a href="<?= get_the_permalink($id) ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+							<div class="wc-img-wrapper">
+								<img src="<?= get_the_post_thumbnail_url($id, 'large') ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail">
+							</div>
+							<h2 class="woocommerce-loop-product__title"><?= get_the_title($id) ?></h2>
+						</a>
+						<a href="<?= get_the_permalink($id) ?>" class="button">
+							View Product
+						</a>
+					</li>
+				<?php } ?>
 			</ul>
 		</div>
 <?php
+
 	}
 }
