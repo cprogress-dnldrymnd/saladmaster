@@ -192,29 +192,11 @@ function bbloomer_hide_products_category_shop($q)
 	$q->set('tax_query', $tax_query);
 }
 
-add_filter('wp_get_object_terms', function ($terms, $object_ids, $taxonomies, $args) {
-
-	// Don't mess with admin stuff
-	if (is_admin()) {
-		return $terms;
-	}
-
-	// Category term_id to exclude
-	$exclude = array(37);
-
-	// Loop through terms and remove items
-	if ($terms) {
-		foreach ($terms as $key => $term) {
-			if (
-				is_object($term)
-				&& $term->taxonomy == 'product_cat'
-				&& in_array($term->term_id, $exclude)
-			) {
-				unset($terms[$key]);
-			}
-		}
-	}
-
-	// Return terms
-	return $terms;
-}, PHP_INT_MAX, 4 );
+//Hide categories from WordPress category widget
+function exclude_widget_categories($args)
+{
+	$exclude = "37";
+	$args["exclude"] = $exclude;
+	return $args;
+}
+add_filter("widget_categories_args", "exclude_widget_categories");
