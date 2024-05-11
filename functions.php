@@ -164,3 +164,30 @@ function products_included_query($query)
 	$query->set('post__in', $p_id);
 }
 add_action('elementor/query/included_products', 'products_included_query');
+
+
+/**
+ * @snippet       Hide Products From Specific Category @ Shop
+ * @how-to        Get CustomizeWoo.com FREE
+ * @author        Rodolfo Melogli
+ * @compatible    WooCommerce 8
+ * @community     https://businessbloomer.com/club/
+ */
+  
+ add_action( 'woocommerce_product_query', 'bbloomer_hide_products_category_shop' );
+   
+ function bbloomer_hide_products_category_shop( $q ) {
+   
+	 $tax_query = (array) $q->get( 'tax_query' );
+   
+	 $tax_query[] = array(
+			'taxonomy' => 'product_cat',
+			'field' => 'term_id',
+			'terms' => array( 37 ), 
+			'operator' => 'NOT IN'
+	 );
+   
+   
+	 $q->set( 'tax_query', $tax_query );
+   
+ }
