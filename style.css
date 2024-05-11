@@ -49,7 +49,7 @@ input {
     background-color: var(--primary-color);
     color: var(--white-color); }
 
-.button-menu.button-menu.button-menu.button-menu.button-menu a {
+.button-menu.button-menu.button-menu.button-menu.button-menu.button-menu a {
   border-radius: 50px;
   padding: 15px 30px;
   font-size: 18px;
@@ -57,7 +57,7 @@ input {
   background-color: var(--accent-color);
   color: var(--white-color);
   transition: 500ms; }
-  .button-menu.button-menu.button-menu.button-menu.button-menu a:hover {
+  .button-menu.button-menu.button-menu.button-menu.button-menu.button-menu a:hover {
     background-color: var(--primary-color);
     color: var(--white-color); }
 
