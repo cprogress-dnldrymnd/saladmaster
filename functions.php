@@ -191,18 +191,3 @@ function bbloomer_hide_products_category_shop($q)
 
 	$q->set('tax_query', $tax_query);
 }
-
-
-function exclude_category()
-{
-	return function ($query) {
-		if (
-			$query->is_home()
-			&& $query->is_main_query()
-		) {
-			$query->set('cat', 37);
-		}
-	};
-}
-
-add_action('pre_get_posts', 'exclude_category');
