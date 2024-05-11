@@ -199,4 +199,4 @@ function exclude_widget_categories($args)
 	$args["exclude"] = $exclude;
 	return $args;
 }
-add_filter("widget_categories_args", "exclude_widget_categories");
+add_filter("woocommerce_product_categories_widget_args", "exclude_widget_categories");
