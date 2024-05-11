@@ -10,7 +10,7 @@ use Carbon_Fields\Field;
 /* Products Included
 /*-----------------------------------------------------------------------------------*/
 Container::make('post_meta', 'Product Included')
-	->where('post_type', '=', 'solutions')
+	->where('post_type', '=', 'product')
 	->add_fields(
 		array(
             Field::make('association', 'products_included', 'Select Product Included')
