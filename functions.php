@@ -94,3 +94,12 @@ add_action('woocommerce_after_shop_loop_item', 'action_woocommerce_after_shop_lo
 	if ( ! is_admin() ) $price = '';
 	return $price;
  }
+
+ /*-----------------------------------------------------------------------------------*/
+/* Register Carbofields
+/*-----------------------------------------------------------------------------------*/
+add_action('carbon_fields_register_fields', 'tissue_paper_register_custom_fields');
+function tissue_paper_register_custom_fields()
+{
+	require_once('includes/post-meta.php');
+}
