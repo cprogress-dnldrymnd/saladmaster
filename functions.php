@@ -191,12 +191,3 @@ function bbloomer_hide_products_category_shop($q)
 
 	$q->set('tax_query', $tax_query);
 }
-
-//Hide categories from WordPress category widget
-function exclude_widget_categories($args)
-{
-	$exclude = "37";
-	$args["exclude"] = $exclude;
-	return $args;
-}
-add_filter("woocommerce_product_categories_widget_args", "exclude_widget_categories");
