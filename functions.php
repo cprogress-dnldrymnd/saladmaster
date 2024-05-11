@@ -112,3 +112,27 @@ function iconic_disable_reviews() {
 }
 
 add_action( 'init', 'iconic_disable_reviews' );
+
+/**
+ * @snippet       New Product Tab @ WooCommerce Single Product
+ * @how-to        Get CustomizeWoo.com FREE
+ * @author        Rodolfo Melogli
+ * @compatible    WooCommerce 8
+ * @community     https://businessbloomer.com/club/
+ */
+ 
+ add_filter( 'woocommerce_product_tabs', 'bbloomer_add_product_tab', 9999 );
+   
+ function bbloomer_add_product_tab( $tabs ) {
+	$tabs['products_included'] = array(
+	   'title' => __( 'Products Included', 'woocommerce' ), // TAB TITLE
+	   'priority' => 50, // TAB SORTING (DESC 10, ADD INFO 20, REVIEWS 30)
+	   'callback' => 'action_products_included_tab', // TAB CONTENT CALLBACK
+	);
+	return $tabs;
+ }
+  
+ function action_products_included_tab() {
+	global $product;
+	echo 'Whatever content for ' . $product->get_name();
+ }
