@@ -70,7 +70,7 @@ function action_woocommerce_after_shop_loop_item()
 {
 ?>
 	<a href="<?= get_the_permalink() ?>" class="button"> View Product </a>
-	<?php
+<?php
 }
 
 add_action('woocommerce_after_shop_loop_item', 'action_woocommerce_after_shop_loop_item');
@@ -142,10 +142,7 @@ function action_products_included_tab()
 {
 	$products_included = carbon_get_the_post_meta('products_included');
 	if ($products_included) {
-
-	?>
-
-<?php
-
+		echo '<h2>Products Included</h2>';
+		echo do_shortcode('[elementor-template id="436"]');
 	}
 }
