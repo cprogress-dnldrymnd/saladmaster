@@ -127,41 +127,24 @@ add_filter('woocommerce_product_tabs', 'bbloomer_add_product_tab', 9999);
 
 function bbloomer_add_product_tab($tabs)
 {
-	$tabs['products_included'] = array(
-		'title' => __('Products Included', 'woocommerce'), // TAB TITLE
-		'priority' => 50, // TAB SORTING (DESC 10, ADD INFO 20, REVIEWS 30)
-		'callback' => 'action_products_included_tab', // TAB CONTENT CALLBACK
-	);
+	$products_included = carbon_get_the_post_meta('products_included');
+	if ($products_included) {
+		$tabs['products_included'] = array(
+			'title' => __('Products Included', 'woocommerce'), // TAB TITLE
+			'priority' => 50, // TAB SORTING (DESC 10, ADD INFO 20, REVIEWS 30)
+			'callback' => 'action_products_included_tab', // TAB CONTENT CALLBACK
+		);
+	}
 	return $tabs;
 }
 
 function action_products_included_tab()
 {
-	global $product;
 	$products_included = carbon_get_the_post_meta('products_included');
 	if ($products_included) {
 
 	?>
-		<div class="products-included">
-			<ul class="included-products">
-				<?php foreach ($products_included as $product) { ?>
-					<?php
-					$id = $product['id'];
-					?>
-					<li class="included-product post-<?= $id ?>">
-						<a href="<?= get_the_permalink($id) ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-							<div class="wc-img-wrapper">
-								<img src="<?= get_the_post_thumbnail_url($id, 'large') ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail">
-							</div>
-							<h2 class="woocommerce-loop-product__title"><?= get_the_title($id) ?></h2>
-						</a>
-						<a href="<?= get_the_permalink($id) ?>" class="button">
-							View Product
-						</a>
-					</li>
-				<?php } ?>
-			</ul>
-		</div>
+
 <?php
 
 	}
