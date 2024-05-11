@@ -146,3 +146,21 @@ function action_products_included_tab()
 		echo do_shortcode('[elementor-template id="436"]');
 	}
 }
+
+
+
+function products_included_query($query)
+{
+
+	$products_included = carbon_get_the_post_meta('products_included');
+
+	$p_id = array();
+
+	foreach($products_included as $product) {
+		$p_id[] = $product['id'];
+	}
+
+
+	$query->set('post__in', $p_id);
+}
+add_action('elementor/query/included_products', 'products_included_query');
