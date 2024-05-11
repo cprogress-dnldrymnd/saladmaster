@@ -143,12 +143,12 @@ function action_products_included_tab()
 
 	?>
 		<div class="products-included">
-			<ul class="products elementor-grid columns-4">
+			<ul class="included-products">
 				<?php foreach ($products_included as $product) { ?>
 					<?php
 					$id = $product['id'];
 					?>
-					<li class="product type-product post-<?= $id ?>">
+					<li class="included-product post-<?= $id ?>">
 						<a href="<?= get_the_permalink($id) ?>" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
 							<div class="wc-img-wrapper">
 								<img src="<?= get_the_post_thumbnail_url($id, 'large') ?>" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail">
