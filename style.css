@@ -48,6 +48,8 @@ input {
   .button.button.button:hover {
     background-color: var(--primary-color);
     color: var(--white-color); }
+  .button.button.button svg {
+    margin-right: 10px; }
 
 .button-menu.button-menu.button-menu.button-menu.button-menu.button-menu a {
   border-radius: 50px;

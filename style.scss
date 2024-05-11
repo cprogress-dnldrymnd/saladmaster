@@ -59,6 +59,9 @@ input {
 }
 .button.button.button {
     @include button;
+    svg {
+        margin-right: 10px
+    }
 }
 .button-menu.button-menu.button-menu.button-menu.button-menu.button-menu a {
     @include button;
