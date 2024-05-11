@@ -103,3 +103,12 @@ function tissue_paper_register_custom_fields()
 {
 	require_once('includes/post-meta.php');
 }
+
+/**
+ * Disable reviews.
+ */
+function iconic_disable_reviews() {
+	remove_post_type_support( 'product', 'comments' );
+}
+
+add_action( 'init', 'iconic_disable_reviews' );
