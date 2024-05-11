@@ -74,3 +74,23 @@ function action_woocommerce_after_shop_loop_item()
 }
 
 add_action('woocommerce_after_shop_loop_item', 'action_woocommerce_after_shop_loop_item');
+
+
+/**
+ * @snippet       WooCommerce Hide Prices Except Cart / Checkout
+ * @how-to        Get CustomizeWoo.com FREE
+ * @author        Rodolfo Melogli
+ * @compatible    WooCommerce 5.1
+ * @community     https://businessbloomer.com/club/
+ */
+ 
+ add_filter( 'woocommerce_variable_sale_price_html', 'businessbloomer_remove_prices', 9999, 2 );
+ 
+ add_filter( 'woocommerce_variable_price_html', 'businessbloomer_remove_prices', 9999, 2 );
+  
+ add_filter( 'woocommerce_get_price_html', 'businessbloomer_remove_prices', 9999, 2 );
+  
+ function businessbloomer_remove_prices( $price, $product ) {
+	if ( ! is_admin() ) $price = '';
+	return $price;
+ }
