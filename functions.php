@@ -156,7 +156,7 @@ function products_included_query($query)
 
 	$p_id = array();
 
-	foreach($products_included as $product) {
+	foreach ($products_included as $product) {
 		$p_id[] = $product['id'];
 	}
 
@@ -173,21 +173,36 @@ add_action('elementor/query/included_products', 'products_included_query');
  * @compatible    WooCommerce 8
  * @community     https://businessbloomer.com/club/
  */
-  
- add_action( 'woocommerce_product_query', 'bbloomer_hide_products_category_shop' );
-   
- function bbloomer_hide_products_category_shop( $q ) {
-   
-	 $tax_query = (array) $q->get( 'tax_query' );
-   
-	 $tax_query[] = array(
-			'taxonomy' => 'product_cat',
-			'field' => 'term_id',
-			'terms' => array( 37 ), 
-			'operator' => 'NOT IN'
-	 );
-   
-   
-	 $q->set( 'tax_query', $tax_query );
-   
- }
+
+add_action('woocommerce_product_query', 'bbloomer_hide_products_category_shop');
+
+function bbloomer_hide_products_category_shop($q)
+{
+
+	$tax_query = (array) $q->get('tax_query');
+
+	$tax_query[] = array(
+		'taxonomy' => 'product_cat',
+		'field' => 'term_id',
+		'terms' => array(37),
+		'operator' => 'NOT IN'
+	);
+
+
+	$q->set('tax_query', $tax_query);
+}
+
+
+function exclude_category()
+{
+	return function ($query) {
+		if (
+			$query->is_home()
+			&& $query->is_main_query()
+		) {
+			$query->set('cat', 37);
+		}
+	};
+}
+
+add_action('pre_get_posts', $exclude_category);
